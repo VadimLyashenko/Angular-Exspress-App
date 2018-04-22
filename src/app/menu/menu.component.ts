@@ -1,43 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+class UserCart {
+	// img: string,
+	title: string;
+	cost: string;
+	count: number;
+}
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
+
 export class MenuComponent implements OnInit {
 
 	categories: any;
 	sel_category: any;
-
-  // Position[] = [ { id: 1, name: "Томатный суп", cost: "300р", 
-  // 	desc 	 : "ингридиент-1, ингиеыыснт-2, ингридиент-3",
-		// weight : "300г",
-		// img		 : "assets/img/tomato-soup.png",
-		// id_category: 1},
-		// { id: 2, name: "Каша", cost: "1500р", 
-  // 	desc 	 : "ингриди2222нт-1, ингиеыыснт-45, ингридиент-3",
-		// weight : "2000г",
-		// img		 : "assets/img/tomato-soup.png",
-		// id_category: 1},
-		// { id: 2, name: "Каша", cost: "1500р", 
-  // 	desc 	 : "ингриди2222нт-1, ингиеыыснт-45, ингридиент-3",
-		// weight : "2000г",
-		// img		 : "assets/img/tomato-soup.png",
-		// id_category: 1},
-		// { id: 2, name: "Каша", cost: "1500р", 
-  // 	desc 	 : "ингриди2222нт-1, ингиеыыснт-45, ингридиент-3",
-		// weight : "2000г",
-		// img		 : "assets/img/tomato-soup.png",
-		// id_category: 1},
-		// { id: 2, name: "Каша", cost: "1500р", 
-  // 	desc 	 : "ингриди2222нт-1, ингиеыыснт-45, ингридиент-3",
-		// weight : "2000г",
-		// img		 : "assets/img/tomato-soup.png",
-		// id_category: 1}
-  // ]
-  
+	item: any;
+	count: any = 1;
+	cart: UserCart[];
+	
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -50,4 +35,16 @@ export class MenuComponent implements OnInit {
  		this.sel_category = sel_category;
 	}
 
+	onMinus(): void {
+		if(this.count >1)
+ 		this.count--;
+	}
+
+	onPlus(): void {
+ 		this.count++;
+	}
+
+	inCart(item, count): void {
+ 		this.cart = [{ title: item.title, cost: item.cost, count: count }];
+ 	}
 }
