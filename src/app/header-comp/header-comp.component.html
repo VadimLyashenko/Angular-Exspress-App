@@ -1,34 +1,35 @@
+<div class="main-back" *ngIf="!bg_check"></div>
 <button class="burger"><span class="burger__line" id="js-nav-button"></span>
-      </button>
-      <nav class="nav" id="js-nav">
-        <ul class="menu">
-          <li>Главная</li>
-          <li><a routerLink="/menu" (click)="onSelectMenu()">Меню</a></li>
-          <li><a routerLink="/cart" (click)="onSelectCart()">Корзина</a></li>
-          <li>Контакты</li>
-        </ul>
-      </nav>
-      <header class="header">
-        <div class="header__header_bg">
-        </div>
-        <div class="header_content">
-          <div class="title_wrap">
-            <h2 class="title_wrap__title">{{ title }}
-            </h2>
-          </div>
-          <div class="site-overlay" id="js-overlay">
-          </div>
-          <div class="main_menu">
-            <ul class="main_menu__ul">
-              <li><a href="index.html">Главная</a></li>
-              <li><a routerLink="/menu" (click)="onSelectMenu()">Меню</a></li>
-              <li><a routerLink="/cart" (click)="onSelectCart()">Корзина</a></li>
-              <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-          </div>
-          <div class="page_name">
-            <h1 class="page_name__page_name_h">{{ page_name }}
-            </h1>
-          </div>
-        </div>
-      </header>
+</button>
+<nav class="nav" id="js-nav">
+  <ul class="menu">
+    <li><a routerLink="/" (click)="setTitle( 'Главная' )">Главная</a></li>
+    <li><a routerLink="/menu" (click)="setTitle( 'Меню' )">Меню</a></li>
+    <li><a routerLink="/cart" (click)="setTitle( 'Корзина' )">Корзина</a></li>
+    <li><a routerLink="/contacts" (click)="setTitle( 'Контакты' )">Контакты</a></li>
+  </ul>
+</nav>
+<header class="header">
+  <div class="header__header_bg" *ngIf="bg_check">
+  </div>
+  <div class="header_content">
+    <div class="title_wrap">
+      <h2 class="title_wrap__title">{{ title }}
+      </h2>
+    </div>
+    <div class="site-overlay" id="js-overlay">
+    </div>
+    <div class="main_menu">
+      <ul class="main_menu__ul">
+        <li><a routerLink="/" (click)="setTitle( 'Главная' )">Главная</a></li>
+        <li><a routerLink="/menu" (click)="setTitle( 'Меню' )">Меню</a></li>
+        <li><a routerLink="/cart" (click)="setTitle( 'Корзина' )">Корзина</a></li>
+        <li><a routerLink="/contacts" (click)="setTitle( 'Контакты' )">Контакты</a></li>
+      </ul>
+    </div>
+    <div class="page_name">
+      <h1 class="page_name__page_name_h">{{ router }}
+      </h1>
+    </div>
+  </div>
+</header>

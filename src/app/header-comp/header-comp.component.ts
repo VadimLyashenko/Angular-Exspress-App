@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header-comp',
@@ -7,21 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderCompComponent implements OnInit {
 
-	title = "Название";
+  title = "Название";
+  router: string;
+  bg_check: boolean = true;
 
-	page_name = "";
-
-  constructor() { }
-
+  constructor( private _router: Router, private titleService: Title ) {}
+  
   ngOnInit() {
+    this.getRoute();
   }
-	
-	onSelectMenu(): void {
-  	this.page_name = "Меню";
-	}
+  
+  getRoute(){
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if(event.url == '/'){
+          this.router = '';
+          this.bg_check = false;
+        }
+        if(event.url == '/menu'){
+          this.router = 'Меню';
+          this.bg_check = true;
+        } 
+        if(event.url == '/cart'){
+          this.router = 'Корзина';
+          this.bg_check = true;
+        }
+        if(event.url == '/contacts'){
+          this.router = 'Контакты';
+          this.bg_check = true;
+        }
+      }
+    })   
+  }
 
-	onSelectCart(): void {
-  	this.page_name = "Корзина";
-	}
-
+  public setTitle( newTitle: string) {
+    this.titleService.setTitle( newTitle );
+  }
 }

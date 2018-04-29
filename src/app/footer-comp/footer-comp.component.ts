@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-footer-comp',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterCompComponent implements OnInit {
 
-  constructor() { }
+	bg_check: boolean = true;
+
+  constructor(private _router: Router) { }
 
   ngOnInit() {
+  	this.getRoute()
   }
 
+  getRoute(){
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if(event.url == '/'){
+          this.bg_check = false;
+        }
+        if(event.url == '/menu'){
+          this.bg_check = true;
+        }
+        if(event.url == '/cart'){
+          this.bg_check = true;
+        }
+        if(event.url == '/contacts'){
+          this.bg_check = true;
+        }
+      }
+    })
+  }
 }

@@ -1,86 +1,98 @@
-      <div class="menu-content-wrap">
-        <div class="left-bar"><span class="left-bar__toggle-left-bar">Выберите Категорию</span>
-          <ul class="left-bar__menu">
-            <li *ngFor="let category of categories" (click)="onSelect(category)">{{ category.title }}</li>
-          </ul>
-        </div>
-        <div *ngFor="let position of cart">
-          {{ position.title }}
-          {{ position.cost }}
-          {{ position.count}}
-        </div>
-        <div class="right-bar">
-          <div *ngIf="sel_category; else elseBlock">
-            <div class="row" myMatchHeight="pos">
-              <div class="col-lg-4 col-md-6 col-sm-6 item" *ngFor="let item of sel_category.positions" >
-                <img src={{item.img}} alt=""/>
-                <div class="item-title-wrap">
-                  <h5 class="item-title-wrap__item-title">{{ item.title }}
-                  </h5>
-                </div>
-                <div class="item-bottom-wrap">
-                  <div class="item-cost-wrap">
-                    <p class="item-cost-wrap__item-cost">{{ item.cost }}
-                    </p>
-                  </div>
-                  <div class="item-desc-wrap">
-                    <p class="item-desc-wrap__item-desc"> <span class="item-span">Состав: </span>{{ item.desc }}
-                    </p>
-                    <p class="item-desc-wrap__item-weight"><span class="item-span">Вес: </span>{{ item.weight }}
-                    </p>
-                  </div>
-                  <div class="item-func-wrap">
-                    <div class="item-quan">
-                      <button class="item-quan__quan-control minus" (click)="onMinus()">-
-                      </button><input class="item-quan__inp" type="number" min="1" max="100" value="{{ count }}"/>
-                      <button class="item-quan__quan-control plus" (click)="onPlus(item)">+
-                      </button>
-                    </div>
-                    <div class="in-cart-wrap">
-                      <button class="in-cart-wrap__in-cart" (click)="inCart(item, count)"><i class="fas fa-shopping-cart"> </i>
-                        <p>В корзину</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+<div class="menu-content-wrap">
+  <div class="left-bar">
+    <ul class="left-bar__menu">
+      <li *ngFor="let category of categories" [@Cat_State]="category.state" (click)="onSelect(category)" (click)="toggleState(category)">{{ category.title }}</li>
+    </ul>
+    <div class="dropdown">
+      <button class="dropdown__button" (click)="showMenu(active_drop_button)">Меню<div *ngIf="active_drop_button; else else_i"><i  class="fas fa-caret-up"></i></div></button>
+      <ul class="dropdown__menu" *ngIf="active_drop_button" [@dropMenu]>
+        <li *ngFor="let category of categories" (click)="onSelect(category)">{{ category.title }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="right-bar">
+    <div *ngIf="sel_category; else elseBlock">
+      <div class="row" myMatchHeight="pos">
+        <div class="col-lg-4 col-md-6 col-sm-6 item" *ngFor="let item of sel_category.positions" [@flyIn]>
+          <img src={{item.img}} alt=""/>
+          <div class="item-title-wrap">
+            <h5 class="item-title-wrap__item-title">{{ item.title }}
+            </h5>
+          </div>
+          <div class="item-bottom-wrap">
+            <div class="item-cost-wrap">
+              <p class="item-cost-wrap__item-cost">{{ item.cost }}р
+              </p>
+            </div>
+            <div class="item-desc-wrap">
+              <p class="item-desc-wrap__item-desc"> <span class="item-span">Состав: </span>{{ item.desc }}
+              </p>
+              <p class="item-desc-wrap__item-weight"><span class="item-span">Вес: </span>{{ item.weight }}
+              </p>
+            </div>
+            <div class="item-func-wrap">
+              <div class="item-quan">
+                <button class="item-quan__quan-control minus" (click)="onMinus(item)">-
+                </button><input #inp_id class="item-quan__inp" type="number" min="1" max="100" value="{{ item.count }}" (keyup.enter)="updateInput(inp_id.value, item)" (blur)="updateInput(inp_id.value, item)"/>
+                <button class="item-quan__quan-control plus" (click)="onPlus(item)">+
+                </button>
+              </div>
+              <div class="in-cart-wrap" >
+                <button class="in-cart-wrap__in-cart" (click)="addCarties(item)" *ngIf="item.status; else elseButton">
+                  <i class="fas fa-shopping-cart"> </i>
+                  <p>Купить</p>
+                </button>
               </div>
             </div>
-          </div>      
-          <ng-template #elseBlock>
-            <div class="row" myMatchHeight="pos">
-              <div class="col-lg-4 col-md-6 col-sm-6 item" *ngFor="let item of categories[1].positions" >
-              	<img src={{item.img}} alt=""/>
-                <div class="item-title-wrap">
-                  <h5 class="item-title-wrap__item-title">{{ item.title }}
-                  </h5>
-                </div>
-                <div class="item-bottom-wrap">
-                  <div class="item-cost-wrap">
-                    <p class="item-cost-wrap__item-cost">{{ item.cost }}
-                    </p>
-                  </div>
-                  <div class="item-desc-wrap">
-                    <p class="item-desc-wrap__item-desc"> <span class="item-span">Состав: </span>{{ item.desc }}
-                    </p>
-                    <p class="item-desc-wrap__item-weight"><span class="item-span">Вес: </span>{{ item.weight }}
-                    </p>
-                  </div>
-                  <div class="item-func-wrap">
-                    <div class="item-quan">
-                      <button class="item-quan__quan-control minus" (click)="onMinus()">-
-                      </button><input class="item-quan__inp" type="number" min="1" max="100" value="{{ count }}"/>
-                      <button class="item-quan__quan-control plus" (click)="onPlus(item)">+
-                      </button>
-                    </div>
-                    <div class="in-cart-wrap">
-                      <button class="in-cart-wrap__in-cart" (click)="inCart(item, count)"><i class="fas fa-shopping-cart"> </i>
-                        <p>В корзину</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
+          </div>
         </div>
       </div>
+    </div>      
+    <ng-template #elseBlock>
+      <div class="row" myMatchHeight="pos">
+        <div class="col-lg-4 col-md-6 col-sm-6 item" *ngFor="let item of categories[0].positions" [@flyIn]>
+          <img src={{item.img}} alt=""/>
+          <div class="item-title-wrap">
+            <h5 class="item-title-wrap__item-title">{{ item.title }}
+            </h5>
+          </div>
+          <div class="item-bottom-wrap">
+            <div class="item-cost-wrap">
+              <p class="item-cost-wrap__item-cost">{{ item.cost }}р
+              </p>
+            </div>
+            <div class="item-desc-wrap">
+              <p class="item-desc-wrap__item-desc"> <span class="item-span">Состав: </span>{{ item.desc }}
+              </p>
+              <p class="item-desc-wrap__item-weight"><span class="item-span">Вес: </span>{{ item.weight }}
+              </p>
+            </div>
+            <div class="item-func-wrap">
+              <div class="item-quan">
+                <button class="item-quan__quan-control minus" (click)="onMinus(item)">-
+                </button><input #inp_id class="item-quan__inp" type="number" min="1" max="100" value="{{ item.count }}" (keyup.enter)="updateInput(inp_id.value, item)" (blur)="updateInput(inp_id.value, item)"/>
+                <button class="item-quan__quan-control plus" (click)="onPlus(item)">+
+                </button>
+              </div>
+              <div class="in-cart-wrap">
+                <button class="in-cart-wrap__in-cart" (click)="addCarties(item)" *ngIf="item.status; else elseButton">
+                  <i class="fas fa-shopping-cart"> </i>
+                  <p>Купить</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #elseButton>
+  <button class="in-cart-wrap__in-cart">
+    <i class="fas fa-check-circle"> </i>
+    <p>В корзине</p>
+  </button>
+</ng-template>
+<ng-template #else_i>
+  <div><i class="fas fa-caret-down"></i></div>
+</ng-template>

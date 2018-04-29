@@ -1,3 +1,93 @@
-<p>
-  cart works!
-</p>
+<div class="cart-content-wrap" *ngIf="cart != 0; else elseBlock_1">
+  <div class="cart">
+    <div class="cart__cart-itens-wrap">
+      <div class="cart-item" *ngFor="let item of cart" [@flyOut]>
+        <div class="cart-item__img-title-cost-quan-wrap">
+          <div class="cart-item__img-wrap"><img class="cart-item__item-img" src="{{ item.img }}" alt="" role="presentation"/>
+          </div>
+          <div class="cart-item__title-cost-quan-allcost-wrap">
+            <div class="cart-item__title-cost-quan-wrap">
+              <div class="cart-item__title-wrap">
+                <h5 class="cart-item__item-title">{{ item.title }}
+                </h5>
+              </div>
+              <div class="cart-item__cost-quan-wrap">
+                <div class="cart-item__cost-wrap">
+                  <p class="cart-item__item-cost">{{ item.cost }}р
+                  </p>
+                </div>
+                <div class="cart-item__quan-wrap">
+                  <div class="item-quan">
+                    <button class="item-quan__quan-control minus" (click)="onMinusCart(item)">-
+                    </button><input #inp_id_2 class="item-quan__inp" type="number" min="1" max="100" value="{{ item.count }}" (keyup.enter)="updateInput(inp_id_2.value, item)" (blur)="updateInput(inp_id_2.value, item)"/>
+                    <button class="item-quan__quan-control plus" (click)="onPlusCart(item)">+
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cart-item__all-cost-del-button-wrap">
+              <div class="cart-item__all-cost-wrap">
+                <p class="cart-item__all-item-cost">{{ item.cost * item.count }}р
+                </p>
+              </div>
+              <div class="del-button-wrap">
+                <button class="del-button-wrap__del-button" (click)="delCart(item)">
+                  <I class="fa fa-trash-alt"></I>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total-wrap">
+      <p class="total-wrap__text">Итого к оплате: <span>{{ allcost }}</span>р
+      </p>
+    </div>
+  </div>
+  <div class="form-wrap">
+    <p class="form-wrap__form-head">Заполните форму ниже, чтобы оформить заказ
+    </p>
+    <!-- <form action=""> -->
+    <div class="form">
+      <div class="form__form-line-wrap">
+        <p class="form__form-text">Имя:
+        </p><input required name="name" class="form__form-input" value="{{ name }}" #inp_name (keyup.enter)="updateInputName(inp_name.value)" (blur)="updateInputName(inp_name.value)"/>
+      </div>
+      <div class="form__form-line-wrap">
+        <p class="form__form-text">Телефон:
+        </p><input required class="form__form-input" type="tel" value="{{ tel }}" #inp_tel (keyup.enter)="updateInputTel(inp_tel.value)" (blur)="updateInputTel(inp_tel.value)"/>
+      </div>
+      <div class="form__form-line-wrap">
+        <p class="form__form-text">Адрес:
+        </p><input required class="form__form-input" type="text" value="{{ address }}" #inp_address (keyup.enter)="updateInputAddress(inp_address.value)" (blur)="updateInputAddress(inp_address.value)"/>
+      </div>
+      <div class="submit-button-wrap">
+        <button class="submit-button-wrap__submit-button" (click)="addOrder()">Оформить заказ
+        </button>
+      </div>
+    </div>
+    <!-- </form> -->
+  </div>
+</div>
+<ng-template #elseBlock_1>
+  <div class="cart-content-wrap" [@flyIn] *ngIf="order_check; else elseBlock_2">
+    <div class="empty-cart">
+      Ваша корзина пуста!
+      <br>
+      <br>
+      <img src="../../assets/img/empty_cart_1.svg" alt="">
+    </div>
+  </div>
+</ng-template>
+<ng-template #elseBlock_2>
+  <div class="cart-content-wrap" [@flyIn]>
+    <div class="empty-cart">
+      Спасибо за покупку!
+      <br>
+      <br>
+      <img src="../../assets/img/empty_cart_2.svg" alt="">
+    </div>
+  </div>
+</ng-template>
