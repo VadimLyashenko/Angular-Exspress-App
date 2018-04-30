@@ -30,7 +30,7 @@ export class OrderService {
 
     //   Carties.length = 0;
     // }
-    let body = JSON.stringify({ title: name, tel: tel, address: address, allcost: allcost, cart_positions: []});
+    let body = JSON.stringify({});
     console.log(body);
     return this.http.post('/order', body, httpOptions);
   }

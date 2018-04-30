@@ -82,6 +82,7 @@ export class CartComponent implements OnInit {
 
   addOrder(): void{
     this.order_check = false;
-    this.orderService.addOrder(this.name, this.tel, this.address, this.allcost);
+    let a = this.orderService.addOrder(this.name, this.tel, this.address, this.allcost);
+    console.log(a);
   }
 }
