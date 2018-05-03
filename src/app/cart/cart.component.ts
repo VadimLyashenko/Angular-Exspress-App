@@ -3,8 +3,6 @@ import { trigger, state, style, animate, transition, keyframes } from '@angular/
 
 import { Cart } from '../data/cart';
 import { CartService } from '../service/cart.service';
-
-import { Order } from '../data/order';
 import { OrderService } from '../service/order.service';
 
 @Component({
@@ -76,13 +74,15 @@ export class CartComponent implements OnInit {
     this.tel = value;
   }
 
-  updateInputAddress(value): void{
-    this.address = value;
-  }
+	updateInputAddress(value): void{
+		this.address = value;
+	}
 
   addOrder(): void{
     this.order_check = false;
-    let a = this.orderService.addOrder(this.name, this.tel, this.address, this.allcost);
-    console.log(a);
-  }
+		this.orderService.addOrder(this.name, this.tel, this.address, this.allcost)
+			.subscribe(
+				error => console.log(error)
+			);
+	}
 }

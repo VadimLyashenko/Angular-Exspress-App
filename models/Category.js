@@ -15,8 +15,8 @@ var CategorySchema = new mongoose.Schema({
 	id: Number,
   title: String,
   state: { type: String, default: 'inactive'},
-  positions: [PositionSchema],
-  updated_date: { type: Date, default: Date.now }
+  positions: [PositionSchema]
+  // updated_date: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Category', CategorySchema, 'categories');
+module.exports = mongoose.model('Category', CategorySchema, 'category');

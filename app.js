@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/Angular-Express-App', { promiseLibrary: require('bluebird') })
-// mongoose.connect('mongodb://192.168.1.34:27017/Angular-Express-App', { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
@@ -23,21 +22,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/category', category);
 app.use('/order', order);
 app.use('*', express.static(path.join(__dirname, 'dist')));
-
-// app.use('/', express.static(path.join(__dirname, 'dist')));
-// app.use('/menu', express.static(path.join(__dirname, 'dist')));
-// app.use('/cart', express.static(path.join(__dirname, 'dist')));
-// app.use('/contacts', express.static(path.join(__dirname, 'dist')));
-
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-  // res.status(404);
-  // res.type('txt').send('Not found');
-  // res.express.static(path.join(__dirname, 'dist'));
-  // var err = new Error('Not Found');
-  // err.status = 404;
-  // next(err);
-// });
 
 // error handler
 app.use(function(err, req, res, next) {

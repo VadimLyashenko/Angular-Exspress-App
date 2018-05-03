@@ -6,7 +6,6 @@ import { Carties } from "../data/carties";
 import { CategoryService } from '../service/category.service';
 import { CartService } from '../service/cart.service';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -25,9 +24,9 @@ import { CartService } from '../service/cart.service';
     trigger('flyIn',[
       transition('void => *', [
           animate(300, keyframes([
-            style({opacity: 0, transform: 'translateX(-15%)', offset: 0}),
-            style({opacity: 0.3,transform: 'translateX(-7%)', offset: 0.5}),
-            style({opacity: 1,transform: 'translateX(0%)', offset: 1.0})
+						style({opacity: 0.5, offset: 0}),
+						style({opacity: 0.9, offset: 0.5}),
+						style({opacity: 1, offset: 1.0})
           ]))
         ])
     ]),
