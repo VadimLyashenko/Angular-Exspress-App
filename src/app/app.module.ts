@@ -18,6 +18,10 @@ import { OrderService } from './service/order.service';
 import { ContactsComponent } from './contacts/contacts.component';
 import { MainComponent } from './main/main.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { LoginComponent } from './login/login.component';
+
+import { FormsModule } from '@angular/forms';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +33,13 @@ import { NotfoundComponent } from './notfound/notfound.component';
     MathHeightDirective,
     ContactsComponent,
     MainComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
-    BrowserModule,
+		BrowserModule,
+		FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

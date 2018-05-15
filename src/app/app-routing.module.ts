@@ -6,13 +6,24 @@ import { CartComponent }      from './cart/cart.component';
 import { ContactsComponent }      from './contacts/contacts.component';
 import { MainComponent }      from './main/main.component';
 import { NotfoundComponent }      from './notfound/notfound.component';
+import { LoginComponent }      from './login/login.component';
+import { SignupComponent }      from './signup/signup.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'contacts', component: ContactsComponent },
+	{ path: 'contacts', component: ContactsComponent },
+	{path: 'login',
+    component: LoginComponent,
+		data: { title: 'Login' }
+	},
+	{
+    path: 'signup',
+    component: SignupComponent,
+    data: { title: 'Sign Up' }
+  },
   { path: '', component: MainComponent },
-  { path: '**', component: NotfoundComponent }
+	{ path: '**', component: NotfoundComponent }
 ];
 
 

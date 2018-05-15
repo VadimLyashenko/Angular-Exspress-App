@@ -4,14 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/Angular-Express-App', { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
+var config = require('./config/database');
 
 var category = require('./routes/category');
 var order = require('./routes/order');
+var admin = require('./routes/admin');
 var app = express();
 
 app.use(logger('dev'));
@@ -19,8 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use(passport.initialize());
+
 app.use('/category', category);
 app.use('/order', order);
+app.use('/', admin);
 app.use('*', express.static(path.join(__dirname, 'dist')));
 
 // error handler
