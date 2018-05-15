@@ -1,7 +1,7 @@
 <div class="main-back" *ngIf="!bg_check"></div>
-<button class="burger"><span class="burger__line" id="js-nav-button"></span>
+<button class="burger" *ngIf="header_check"><span class="burger__line" id="js-nav-button"></span>
 </button>
-<nav class="nav" id="js-nav">
+<nav class="nav" id="js-nav" *ngIf="header_check" >
   <ul class="menu">
     <li><a routerLink="/" (click)="setTitle( 'Главная' )">Главная</a></li>
     <li><a routerLink="/menu" (click)="setTitle( 'Меню' )">Меню</a></li>
@@ -9,7 +9,7 @@
     <li><a routerLink="/contacts" (click)="setTitle( 'Контакты' )">Контакты</a></li>
   </ul>
 </nav>
-<header class="header">
+<header class="header" *ngIf="header_check">
   <div class="header__header_bg" *ngIf="bg_check">
   </div>
   <div class="header_content">

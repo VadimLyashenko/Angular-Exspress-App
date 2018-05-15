@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   }
 
 	signup() {
-		this.http.post('/signup',this.signupData).subscribe(resp => {
+		this.http.post('api/users/signup',this.signupData).subscribe(resp => {
 			console.log(resp);
 			this.router.navigate(['login']);
 		}, err => {

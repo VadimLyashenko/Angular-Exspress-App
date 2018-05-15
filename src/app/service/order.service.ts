@@ -17,7 +17,7 @@ export class OrderService {
     if(name && tel && address){
 			let body = JSON.stringify({ title: name, tel: tel, address: address, allcost: allcost, cart_positions: Carties});
 			Carties.length = 0;
-			return this.http.post('/order', body, httpOptions);
+			return this.http.post('api/order', body, httpOptions);
 		}
 	}
 }

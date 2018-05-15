@@ -9,6 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class FooterCompComponent implements OnInit {
 
 	bg_check: boolean = true;
+	footer_check: boolean = true;
 
   constructor(private _router: Router) { }
 
@@ -30,6 +31,9 @@ export class FooterCompComponent implements OnInit {
         }
         if(event.url == '/contacts'){
           this.bg_check = true;
+        }
+				if(event.url == '/admin'){
+					this.footer_check = false;
         }
       }
     })

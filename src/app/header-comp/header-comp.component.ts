@@ -12,6 +12,7 @@ export class HeaderCompComponent implements OnInit {
   title = "Название";
   router: string;
   bg_check: boolean = true;
+	header_check: boolean = true;
 
   constructor( private _router: Router, private titleService: Title ) {}
   
@@ -37,6 +38,10 @@ export class HeaderCompComponent implements OnInit {
         if(event.url == '/contacts'){
           this.router = 'Контакты';
           this.bg_check = true;
+        }
+				if(event.url == '/admin'){
+          this.bg_check = true;
+					this.header_check = false;
         }
       }
     })   

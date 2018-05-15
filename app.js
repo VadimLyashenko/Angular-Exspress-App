@@ -14,7 +14,7 @@ var config = require('./config/database');
 
 var category = require('./routes/category');
 var order = require('./routes/order');
-var admin = require('./routes/admin');
+var user = require('./routes/users');
 var app = express();
 
 app.use(logger('dev'));
@@ -24,9 +24,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(passport.initialize());
 
-app.use('/category', category);
-app.use('/order', order);
-app.use('/', admin);
+app.use('/api/category', category);
+app.use('/api/order', order);
+app.use('/api/users', user);
 app.use('*', express.static(path.join(__dirname, 'dist')));
 
 // error handler

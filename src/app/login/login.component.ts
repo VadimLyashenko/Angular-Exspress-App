@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
 	login() {
-		this.http.post('/signin',this.loginData).subscribe(resp => {
+		this.http.post('api/users/signin',this.loginData).subscribe(resp => {
 			this.data = resp;
 			localStorage.setItem('jwtToken', this.data.token);
-			this.router.navigate(['books']);
+			this.router.navigate(['menu']);
 		}, err => {
 			this.message = err.error.msg;
 		});

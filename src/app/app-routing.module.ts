@@ -8,6 +8,7 @@ import { MainComponent }      from './main/main.component';
 import { NotfoundComponent }      from './notfound/notfound.component';
 import { LoginComponent }      from './login/login.component';
 import { SignupComponent }      from './signup/signup.component';
+import { AdminComponent }      from './admin/admin.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent },
@@ -18,10 +19,11 @@ const routes: Routes = [
 		data: { title: 'Login' }
 	},
 	{
-    path: 'signup',
+    path: 'reg',
     component: SignupComponent,
     data: { title: 'Sign Up' }
   },
+	{ path: 'admin', component: AdminComponent },
   { path: '', component: MainComponent },
 	{ path: '**', component: NotfoundComponent }
 ];
